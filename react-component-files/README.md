@@ -108,7 +108,7 @@ happen and maybe your component is too big anyway and should be split.
 ### ComponentName.component.js
 
 This file is purely responsible for the components internal state and handling lifecycle methods
-like `componentDidMount`. It will be a class component (See update for hooks)[(#update-for-hooks)]
+like `componentDidMount`. It will be a class component (See [update for hooks](#update-for-hooks))
 and will only have 1 JSX tag, which is the `ComponentName.render.js` export (or occasionally a
 single export from `ComponentName.style.js`). It will not directly fetch any data from the global
 store or api (although it may use the props passed from `ComponentName.container.js`) and will not
@@ -162,7 +162,7 @@ class HeaderComponent extends Component {
 ### ComponentName.render.js
 
 This file only handles the components markup. It will be a functional component without any state
-(See update for hooks)[(#update-for-hooks)]. There will be no classes, styling or fetching data in
+(See [update for hooks](#update-for-hooks)). There will be no classes, styling or fetching data in
 this file. You can sometimes not include this file if you only have 1 jsx tag in it, which is being
 exported from `ComponentName.style.js`.
 
