@@ -117,7 +117,46 @@ contain any styling.
 Example:
 
 ```
+import React, { Component } from 'react';
+import ComponentName from './ComponentName.render';
 
+class ComponentNameComponent extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      on: false,
+    }
+
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick() {
+    this.setState({ on: !this.state.on });
+  }
+
+  render() {
+    return (
+      <ComponentName
+        onClick={this.onClick}
+        on={this.state.on}
+      />;
+    )
+  }
+}
+
+export default ComponentNameComponent;
+```
+
+You may also notice in this example that the name of the class is `ComponentNameComponent`. You can
+name it whatever you like but as you are importing `ComponentName from './ComponentName.render'` you
+can't call it the same thing. So I like to add `Component` to whatever the component name is called
+when used in a `.component` file e.g.
+
+```
+import Header from './Header.render';
+
+class HeaderComponent extends Component {
 ```
 
 ### ComponentName.render.js
@@ -130,7 +169,16 @@ exported from `ComponentName.style.js`.
 Example:
 
 ```
+import React from 'react';
+import { Container, H1 } from './ComponentName.style';
 
+const ComponentName = ({ title }) => (
+  <Container>
+    <H1>{title}</H1>
+  </Container>
+);
+
+export default ComponentName;
 ```
 
 ### ComponentName.style.js
@@ -142,6 +190,15 @@ then there will be no markup, JSX, classes or data fetching going on here.
 Example:
 
 ```
+import styled from 'styled-components';
+
+export const Container = styled.div`
+  background-color: blue;
+`;
+
+export const H1 = styled.h1`
+  font-size: 20px;
+`;
 
 ```
 
