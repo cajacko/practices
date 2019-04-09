@@ -140,8 +140,8 @@ class ComponentNameComponent extends Component {
       <ComponentName
         onClick={this.onClick}
         on={this.state.on}
-      />;
-    )
+      />
+    );
   }
 }
 
