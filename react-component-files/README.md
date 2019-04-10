@@ -3,7 +3,33 @@
 This is a guide to structuring React component files in such a way to maintain separation of
 concerns (data, state, markup, styling).
 
+## TL;DR
+
+Folder structure
+
+- src
+  - components
+    - [ComponentName](#components)
+      - [index.js](#indexjs) (Just exports one of the files below)
+      - [ComponentName.container.js](#componentnamecontainerjs) (Handles data requirements)
+      - [ComponentName.component.js](#componentnamecomponentjs) (Handles component state & lifecycle method stuff)
+      - [ComponentName.render.js](#componentnamerenderjs) (Only concerned with markup and jsx)
+      - [ComponentName.style.js](#componentnamestylejs) (All the styles!)
+    - [ComponentGroup](#overall-react-component-folder-structure) (Contains related component folders)
+      - [ComponentName](#components) (Same as ComponentName dir above)
+        - ...
+  - [HOCs](#higher-order-components) (All your higher order components)
+    - withComponentName.js
+  - [context](#context) (Any file that sets up context)
+    - ComponentName.js
+  - [scenes](#scenes) (The entry files that your routes render)
+    - SceneName.js
+
+## Contents
+
 - [React Component Files](#react-component-files)
+  - [TL;DR](#tldr)
+  - [Contents](#contents)
   - [Update for Hooks](#update-for-hooks)
   - [Background](#background)
   - [Components](#components)
