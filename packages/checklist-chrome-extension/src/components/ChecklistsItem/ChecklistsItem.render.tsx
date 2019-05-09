@@ -9,20 +9,23 @@ import Collapse from "@material-ui/core/Collapse";
 import Divider from "@material-ui/core/Divider";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
-import Checklist from "./Checklist";
+import Checklist from "../Checklist";
 import { connect } from "react-redux";
-import { IState, IChecklist, Dispatch } from "../store";
+import { IState, IChecklist, Dispatch } from "../../store";
+import Container from "./ChecklistsItem.container";
 
-interface IOwnProps {
+export interface IOwnProps {
   id: string;
 }
 
-interface IMapStateProps extends IChecklist {
+export interface IMapStateProps extends IChecklist {
   isExpanded: boolean;
   exists: boolean;
+  hasChecklistItems: boolean;
+  checklists: string[] | null;
 }
 
-interface IMapDispatchProps {
+export interface IMapDispatchProps {
   setIsExpanded: (isExpanded: boolean) => void;
   clearChecks: () => void;
 }
@@ -35,7 +38,9 @@ const ChecklistsItem = ({
   setIsExpanded,
   exists,
   id,
-  clearChecks
+  clearChecks,
+  hasChecklistItems,
+  checklists
 }: IProps) => {
   if (!exists) return null;
 
@@ -51,7 +56,7 @@ const ChecklistsItem = ({
         </ListItemIcon>
         <ListItemText primary={title} />
 
-        {isExpanded && (
+        {isExpanded && hasChecklistItems && (
           <ListItemSecondaryAction>
             <IconButton aria-label="Clear Checks" onClick={clearChecks}>
               <Clear />
@@ -61,7 +66,8 @@ const ChecklistsItem = ({
       </ListItem>
 
       <Collapse in={isExpanded} timeout="auto" unmountOnExit>
-        <Checklist id={id} />
+        {hasChecklistItems && <Checklist id={id} />}
+        {checklists && checklists.map(id => <Container key={id} id={id} />)}
       </Collapse>
 
       <Divider />
@@ -99,14 +105,17 @@ const mapStateToProps = (state: IState, props: IOwnProps): IMapStateProps => {
       id: "NONE",
       isExpanded: false,
       title: "No Checklist",
-      items: []
+      items: null,
+      checklists: null,
+      hasChecklistItems: false
     };
   }
 
   return {
     ...checklist,
     isExpanded: !!state.expandedByChecklistId[props.id],
-    exists: true
+    exists: true,
+    hasChecklistItems: !!checklist.items && !!checklist.items.length
   };
 };
 

@@ -15,7 +15,7 @@ interface IMapDispatchProps {
 }
 
 interface IMapStateProps {
-  checklists: IState["checklists"];
+  checklists: IState["startingChecklists"];
 }
 
 interface IProps extends IMapStateProps, IMapDispatchProps {}
@@ -52,7 +52,7 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchProps => ({
 
 const mapStateToProps = (state: IState): IMapStateProps => {
   return {
-    checklists: state.checklists
+    checklists: state.startingChecklists
   };
 };
 

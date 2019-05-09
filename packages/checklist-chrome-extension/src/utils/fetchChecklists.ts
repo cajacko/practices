@@ -1,10 +1,5 @@
 import MarkdownIt from "markdown-it";
-import { store } from "../store";
-
-export interface IHeadingContent {
-  heading: string;
-  checklist: string[];
-}
+import { store, ISetChecklists } from "../store";
 
 const parseChecklistFromContent = (content: string) => {
   // Don't continue for content without checklists
@@ -25,30 +20,95 @@ const parseChecklistFromContent = (content: string) => {
     trimmed = trimmed.replace(/\n/gm, " ");
     trimmed = trimmed.replace(/&lt;!--[\s\S]+?--&gt;/gm, "");
 
-    return trimmed.trim();
+    trimmed = trimmed.trim();
+
+    return {
+      id: trimmed,
+      text: trimmed
+    };
   });
 };
 
-const splitContentByHeadings = (content: string): IHeadingContent[] => {
-  const headings = content.match(/^#+(.*)/gm);
-  const contents = content.split(/^#+.*/gm);
+const getHeadingLevel = (heading: string) => {
+  const levelMatch = heading.match(/^#+/);
+  return levelMatch && levelMatch[0] ? levelMatch[0].length : 0;
+};
+
+const getOrderedMeta = (response: string) => {
+  const headings = response.match(/^#+(.*)/gm);
+  const contents = response.split(/^#+.*/gm);
 
   if (!headings) return [];
 
-  return headings
-    .map((heading, i) => {
-      const content = contents[i + 1];
-      const trimmedHeading = heading.replace(/#/gm, "").trim();
-      const checklist = parseChecklistFromContent(content) || [];
+  let nestedIds: string[] = [];
 
-      return {
-        heading: trimmedHeading,
-        checklist
-      };
-    })
-    .filter(checklist => !!checklist.checklist.length);
+  const orderedMeta = headings.map((heading, i) => {
+    const level = getHeadingLevel(heading);
+
+    const goBackBy =
+      nestedIds.length < level ? null : nestedIds.length + 1 - level;
+
+    if (goBackBy) {
+      for (let i = 0; i < goBackBy; i++) {
+        nestedIds.pop();
+      }
+    }
+
+    nestedIds.push(heading);
+
+    const content = contents[i + 1];
+
+    return {
+      id: nestedIds.join(""),
+      heading: heading,
+      path: nestedIds.slice(),
+      title: heading.replace(/#/gm, ""),
+      items: parseChecklistFromContent(content)
+    };
+  });
+
+  return orderedMeta;
 };
 
+const parseChecklists = (content: string): ISetChecklists["payload"] => {
+  const orderedMeta = getOrderedMeta(content);
+
+  const checklistsById: ISetChecklists["payload"]["checklistsById"] = orderedMeta.reduce(
+    (acc, { id, title, items, heading }, i) => {
+      const checklists: string[] = [];
+
+      orderedMeta.forEach((meta, j) => {
+        if (i === j) return;
+
+        if (meta.path[meta.path.length - 2] === heading) {
+          checklists.push(meta.id);
+        }
+      });
+
+      return {
+        ...acc,
+        [id]: {
+          id,
+          title,
+          items,
+          checklists
+        }
+      };
+    },
+    {}
+  );
+
+  return {
+    startingChecklists: orderedMeta
+      .filter(({ path }) => path.length === 1)
+      .map(({ id }) => id),
+    checklistsById: checklistsById
+  };
+};
+
+/**
+ * Fetch the checklist data and dispatch the results
+ */
 const fetchChecklists = () => {
   return fetch(
     "https://raw.githubusercontent.com/cajacko/practices/temp/docs/checklists/README.md"
@@ -59,9 +119,7 @@ const fetchChecklists = () => {
     .then(response => {
       store.dispatch({
         type: "SET_CHECKLISTS",
-        payload: {
-          checklists: splitContentByHeadings(response)
-        }
+        payload: parseChecklists(response)
       });
     });
 };

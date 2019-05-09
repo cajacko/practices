@@ -2,7 +2,6 @@ import { applyMiddleware, createStore, Dispatch as RDispatch } from "redux";
 import logger from "redux-logger";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { IHeadingContent } from "../utils/fetchChecklists";
 
 export interface IChecklistItem {
   id: string;
@@ -11,11 +10,12 @@ export interface IChecklistItem {
 export interface IChecklist {
   id: string;
   title: string;
-  items: IChecklistItem[];
+  items: IChecklistItem[] | null;
+  checklists: string[] | null;
 }
 
 export interface IState {
-  checklists: string[];
+  startingChecklists: string[];
   checklistsById: {
     [key: string]: undefined | IChecklist;
   };
@@ -60,10 +60,11 @@ interface ICloseAllChecklists {
   payload: {};
 }
 
-interface ISetChecklists {
+export interface ISetChecklists {
   type: "SET_CHECKLISTS";
   payload: {
-    checklists: IHeadingContent[];
+    checklistsById: IState["checklistsById"];
+    startingChecklists: IState["startingChecklists"];
   };
 }
 
@@ -77,7 +78,7 @@ type Actions =
 export type Dispatch = RDispatch<Actions>;
 
 const initialState: IState = {
-  checklists: [],
+  startingChecklists: [],
   checklistsById: {},
   checksByChecklistId: {},
   expandedByChecklistId: {}
@@ -122,29 +123,9 @@ const reducer = (state: IState = initialState, action: Actions) => {
     }
 
     case "SET_CHECKLISTS": {
-      const checklists: IState["checklists"] = [];
-      const checklistsById: IState["checklistsById"] = {};
-
-      action.payload.checklists.forEach(({ heading, checklist }) => {
-        const checklistId = heading;
-        checklists.push(checklistId);
-
-        checklistsById[checklistId] = {
-          id: checklistId,
-          title: heading,
-          items: checklist.map(item => {
-            return {
-              id: item,
-              text: item
-            };
-          })
-        };
-      });
-
       return {
         ...state,
-        checklists,
-        checklistsById
+        ...action.payload
       };
     }
 
