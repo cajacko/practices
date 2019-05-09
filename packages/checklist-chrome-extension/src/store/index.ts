@@ -1,5 +1,7 @@
 import { applyMiddleware, createStore, Dispatch as RDispatch } from "redux";
 import logger from "redux-logger";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 export interface IChecklistItem {
   id: string;
@@ -149,6 +151,13 @@ const reducer = (state: IState = initialState, action: Actions) => {
   }
 };
 
-const store = createStore(reducer, applyMiddleware(logger));
+const persistConfig = {
+  key: "root",
+  storage
+};
 
-export default store;
+const persistedReducer = persistReducer(persistConfig, reducer);
+
+export const store = createStore(persistedReducer, applyMiddleware(logger));
+
+export const persistor = persistStore(store);

@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { IState } from "../store";
 import ChecklistsItem from "./ChecklistsItem";
 
+// TODO: Scroll to open one on mount
+
 interface IProps {
   checklists: IState["checklists"];
 }
