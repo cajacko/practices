@@ -2,6 +2,7 @@ import { applyMiddleware, createStore, Dispatch as RDispatch } from "redux";
 import logger from "redux-logger";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { IHeadingContent } from "../utils/fetchChecklists";
 
 export interface IChecklistItem {
   id: string;
@@ -54,7 +55,18 @@ interface IClearChecksAction {
   };
 }
 
-type Actions = ISetExpandedAction | ISetCheckedAction | IClearChecksAction;
+interface ISetChecklists {
+  type: "SET_CHECKLISTS";
+  payload: {
+    checklists: IHeadingContent[];
+  };
+}
+
+type Actions =
+  | ISetExpandedAction
+  | ISetCheckedAction
+  | IClearChecksAction
+  | ISetChecklists;
 
 export type Dispatch = RDispatch<Actions>;
 
@@ -143,6 +155,33 @@ const reducer = (state: IState = initialState, action: Actions) => {
           ...state.checksByChecklistId,
           [action.payload.checklistId]: undefined
         }
+      };
+    }
+
+    case "SET_CHECKLISTS": {
+      const checklists: IState["checklists"] = [];
+      const checklistsById: IState["checklistsById"] = {};
+
+      action.payload.checklists.forEach(({ heading, checklist }) => {
+        const checklistId = heading;
+        checklists.push(checklistId);
+
+        checklistsById[checklistId] = {
+          id: checklistId,
+          title: heading,
+          items: checklist.map(item => {
+            return {
+              id: item,
+              text: item
+            };
+          })
+        };
+      });
+
+      return {
+        ...state,
+        checklists,
+        checklistsById
       };
     }
 

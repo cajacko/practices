@@ -39,6 +39,7 @@
     "jest-environment-jsdom-fourteen": "0.1.0",
     "jest-resolve": "24.7.1",
     "jest-watch-typeahead": "0.3.0",
+    "markdown-it": "^8.4.2",
     "mini-css-extract-plugin": "0.5.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.2.1",
@@ -139,6 +140,7 @@
     ]
   },
   "devDependencies": {
+    "@types/markdown-it": "^0.0.7",
     "@types/react-redux": "^7.0.8",
     "@types/redux-logger": "^3.0.7"
   }
