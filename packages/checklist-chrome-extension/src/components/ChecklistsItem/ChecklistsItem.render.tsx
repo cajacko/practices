@@ -16,6 +16,7 @@ import Container from "./ChecklistsItem.container";
 
 export interface IOwnProps {
   id: string;
+  level: number;
 }
 
 export interface IMapStateProps extends IChecklist {
@@ -32,42 +33,40 @@ export interface IMapDispatchProps {
 
 interface IProps extends IOwnProps, IMapStateProps, IMapDispatchProps {}
 
-const ChecklistsItem = ({
-  title,
-  isExpanded,
-  setIsExpanded,
-  exists,
-  id,
-  clearChecks,
-  hasChecklistItems,
-  checklists
-}: IProps) => {
-  if (!exists) return null;
+const ChecklistsItem = (props: IProps) => {
+  if (!props.exists) return null;
 
   return (
     <React.Fragment>
       <ListItem
         button
-        onClick={() => setIsExpanded(!isExpanded)}
-        selected={isExpanded}
+        onClick={() => props.setIsExpanded(!props.isExpanded)}
+        selected={props.isExpanded}
+        style={{
+          borderLeft:
+            props.level === 0 ? undefined : `${props.level * 5}px solid #398eb1`
+        }}
       >
         <ListItemIcon>
-          {isExpanded ? <ExpandLess /> : <ExpandMore />}
+          {props.isExpanded ? <ExpandLess /> : <ExpandMore />}
         </ListItemIcon>
-        <ListItemText primary={title} />
+        <ListItemText primary={props.title} />
 
-        {isExpanded && hasChecklistItems && (
+        {props.isExpanded && props.hasChecklistItems && (
           <ListItemSecondaryAction>
-            <IconButton aria-label="Clear Checks" onClick={clearChecks}>
+            <IconButton aria-label="Clear Checks" onClick={props.clearChecks}>
               <Clear />
             </IconButton>
           </ListItemSecondaryAction>
         )}
       </ListItem>
 
-      <Collapse in={isExpanded} timeout="auto" unmountOnExit>
-        {hasChecklistItems && <Checklist id={id} />}
-        {checklists && checklists.map(id => <Container key={id} id={id} />)}
+      <Collapse in={props.isExpanded} timeout="auto" unmountOnExit>
+        {props.hasChecklistItems && <Checklist id={props.id} />}
+        {props.checklists &&
+          props.checklists.map(id => (
+            <Container key={id} id={id} level={props.level + 1} />
+          ))}
       </Collapse>
 
       <Divider />

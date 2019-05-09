@@ -70,8 +70,34 @@ const getOrderedMeta = (response: string) => {
   return orderedMeta;
 };
 
+const doAllChecklistsHaveSameRoot = (
+  metaToCheck: Array<{ path: string[] }>
+) => {
+  let root: string;
+
+  return metaToCheck.every(({ path }) => {
+    if (!root) {
+      root = path[0];
+      return true;
+    }
+
+    return path[0] === root;
+  });
+};
+
 const parseChecklists = (content: string): ISetChecklists["payload"] => {
-  const orderedMeta = getOrderedMeta(content);
+  let orderedMeta = getOrderedMeta(content);
+
+  // Keep removing the first item in the path if every checklist contains it. Otherwise we'll be
+  // bloating the drop downs with things that don't need to be there
+  while (doAllChecklistsHaveSameRoot(orderedMeta)) {
+    orderedMeta = orderedMeta.map(meta => {
+      return {
+        ...meta,
+        path: meta.path.slice(1, meta.path.length)
+      };
+    });
+  }
 
   const checklistsById: ISetChecklists["payload"]["checklistsById"] = orderedMeta.reduce(
     (acc, { id, title, items, heading }, i) => {
@@ -97,6 +123,17 @@ const parseChecklists = (content: string): ISetChecklists["payload"] => {
     },
     {}
   );
+
+  // Delete anything without checklist items or checklists
+  Object.values(checklistsById).forEach(checklist => {
+    if (!checklist) return;
+
+    const { items, checklists, id } = checklist;
+
+    if ((!items || !items.length) && (!checklists || !checklists.length)) {
+      delete checklistsById[id];
+    }
+  });
 
   return {
     startingChecklists: orderedMeta

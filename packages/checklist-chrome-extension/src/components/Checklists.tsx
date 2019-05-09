@@ -31,7 +31,7 @@ const Checklists = ({ checklists, closeAllChecklists }: IProps) => (
           <ListItemText primary="Close all checklists" />
         </ListItem>
         {checklists.map(id => (
-          <ChecklistsItem key={id} id={id} />
+          <ChecklistsItem key={id} id={id} level={0} />
         ))}
       </React.Fragment>
     ) : (
