@@ -45,7 +45,14 @@ interface ISetCheckedAction {
   };
 }
 
-type Actions = ISetExpandedAction | ISetCheckedAction;
+interface IClearChecksAction {
+  type: "CLEAR_CHECKS";
+  payload: {
+    checklistId: string;
+  };
+}
+
+type Actions = ISetExpandedAction | ISetCheckedAction | IClearChecksAction;
 
 export type Dispatch = RDispatch<Actions>;
 
@@ -73,7 +80,20 @@ const initialState: IState = {
     "2": {
       id: "2",
       title: "Checklist 2",
-      items: []
+      items: [
+        {
+          id: "1",
+          text: "Item 1"
+        },
+        {
+          id: "2",
+          text: "Item 2"
+        },
+        {
+          id: "3",
+          text: "Item 3"
+        }
+      ]
     },
     "3": {
       id: "3",
@@ -110,6 +130,16 @@ const reducer = (state: IState = initialState, action: Actions) => {
             ...checklistChecks,
             [action.payload.checklistItemId]: action.payload.checked
           }
+        }
+      };
+    }
+
+    case "CLEAR_CHECKS": {
+      return {
+        ...state,
+        checksByChecklistId: {
+          ...state.checksByChecklistId,
+          [action.payload.checklistId]: undefined
         }
       };
     }
