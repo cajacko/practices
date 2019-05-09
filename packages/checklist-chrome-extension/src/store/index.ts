@@ -55,6 +55,11 @@ interface IClearChecksAction {
   };
 }
 
+interface ICloseAllChecklists {
+  type: "CLOSE_ALL_CHECKLISTS";
+  payload: {};
+}
+
 interface ISetChecklists {
   type: "SET_CHECKLISTS";
   payload: {
@@ -66,55 +71,14 @@ type Actions =
   | ISetExpandedAction
   | ISetCheckedAction
   | IClearChecksAction
-  | ISetChecklists;
+  | ISetChecklists
+  | ICloseAllChecklists;
 
 export type Dispatch = RDispatch<Actions>;
 
 const initialState: IState = {
-  checklists: ["1", "2", "3"],
-  checklistsById: {
-    "1": {
-      id: "1",
-      title: "Checklist 1",
-      items: [
-        {
-          id: "1",
-          text: "Item 1"
-        },
-        {
-          id: "2",
-          text: "Item 2"
-        },
-        {
-          id: "3",
-          text: "Item 3"
-        }
-      ]
-    },
-    "2": {
-      id: "2",
-      title: "Checklist 2",
-      items: [
-        {
-          id: "1",
-          text: "Item 1"
-        },
-        {
-          id: "2",
-          text: "Item 2"
-        },
-        {
-          id: "3",
-          text: "Item 3"
-        }
-      ]
-    },
-    "3": {
-      id: "3",
-      title: "Checklist 3",
-      items: []
-    }
-  },
+  checklists: [],
+  checklistsById: {},
   checksByChecklistId: {},
   expandedByChecklistId: {}
 };
@@ -122,13 +86,12 @@ const initialState: IState = {
 const reducer = (state: IState = initialState, action: Actions) => {
   switch (action.type) {
     case "SET_IS_EXPANDED": {
-      const expandedByChecklistId = {
-        [action.payload.checklistId]: action.payload.isExpanded
-      };
-
       return {
         ...state,
-        expandedByChecklistId
+        expandedByChecklistId: {
+          ...state.expandedByChecklistId,
+          [action.payload.checklistId]: action.payload.isExpanded
+        }
       };
     }
 
@@ -182,6 +145,13 @@ const reducer = (state: IState = initialState, action: Actions) => {
         ...state,
         checklists,
         checklistsById
+      };
+    }
+
+    case "CLOSE_ALL_CHECKLISTS": {
+      return {
+        ...state,
+        expandedByChecklistId: {}
       };
     }
 

@@ -34,22 +34,23 @@ const Checklist = (props: IProps) => {
 
   return (
     <List>
-      {props.items.length < 1 && (
+      {!!props.items.length ? (
+        props.items.map(({ id, text, checked }) => (
+          <ListItem
+            key={id}
+            dense
+            button
+            onClick={() => props.setChecked(id, !checked)}
+          >
+            <Checkbox checked={checked} tabIndex={-1} disableRipple />
+            <ListItemText primary={text} />
+          </ListItem>
+        ))
+      ) : (
         <ListItem dense>
           <ListItemText primary="No checklist items" />
         </ListItem>
       )}
-      {props.items.map(({ id, text, checked }) => (
-        <ListItem
-          key={id}
-          dense
-          button
-          onClick={() => props.setChecked(id, !checked)}
-        >
-          <Checkbox checked={checked} tabIndex={-1} disableRipple />
-          <ListItemText primary={text} />
-        </ListItem>
-      ))}
     </List>
   );
 };

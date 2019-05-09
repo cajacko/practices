@@ -1,33 +1,62 @@
 import React from "react";
 import List from "@material-ui/core/List";
 import { connect } from "react-redux";
-import { IState } from "../store";
+import { IState, Dispatch } from "../store";
 import ChecklistsItem from "./ChecklistsItem";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ExpandLess from "@material-ui/icons/ExpandLess";
 
 // TODO: Scroll to open one on mount
 
-interface IProps {
+interface IMapDispatchProps {
+  closeAllChecklists: () => void;
+}
+
+interface IMapStateProps {
   checklists: IState["checklists"];
 }
 
-const Checklists = ({ checklists }: IProps) => (
+interface IProps extends IMapStateProps, IMapDispatchProps {}
+
+const Checklists = ({ checklists, closeAllChecklists }: IProps) => (
   <List>
-    {checklists.length < 1 && (
+    {!!checklists.length ? (
+      <React.Fragment>
+        <ListItem divider selected button onClick={closeAllChecklists}>
+          <ListItemIcon>
+            <ExpandLess />
+          </ListItemIcon>
+          <ListItemText primary="Close all checklists" />
+        </ListItem>
+        {checklists.map(id => (
+          <ChecklistsItem key={id} id={id} />
+        ))}
+      </React.Fragment>
+    ) : (
       <ListItem>
         <ListItemText primary="No checklists to show" />
       </ListItem>
     )}
-    {!!checklists.length &&
-      checklists.map(id => <ChecklistsItem key={id} id={id} />)}
   </List>
 );
 
-const mapStateToProps = (state: IState): IProps => {
+const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchProps => ({
+  closeAllChecklists: () =>
+    dispatch({
+      type: "CLOSE_ALL_CHECKLISTS",
+      payload: {}
+    })
+});
+
+const mapStateToProps = (state: IState): IMapStateProps => {
   return {
     checklists: state.checklists
   };
 };
 
-export default connect(mapStateToProps)(Checklists);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Checklists);
