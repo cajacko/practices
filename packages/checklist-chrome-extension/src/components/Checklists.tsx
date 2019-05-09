@@ -1,36 +1,25 @@
 import React from "react";
 import List from "@material-ui/core/List";
+import { connect } from "react-redux";
+import { IState } from "../store";
 import ChecklistsItem from "./ChecklistsItem";
 
-const checklists = [
-  {
-    id: "1",
-    title: "Checklist 1"
-  },
-  {
-    id: "2",
-    title: "Checklist 2"
-  },
-  {
-    id: "3",
-    title: "Checklist 3"
-  },
-  {
-    id: "4",
-    title: "Checklist 4"
-  },
-  {
-    id: "5",
-    title: "Checklist 5"
-  }
-];
+interface IProps {
+  checklists: IState["checklists"];
+}
 
-const Checklists = () => (
+const Checklists = ({ checklists }: IProps) => (
   <List>
-    {checklists.map(({ id, title }) => (
-      <ChecklistsItem key={id} title={title} />
+    {checklists.map(id => (
+      <ChecklistsItem key={id} id={id} />
     ))}
   </List>
 );
 
-export default Checklists;
+const mapStateToProps = (state: IState): IProps => {
+  return {
+    checklists: state.checklists
+  };
+};
+
+export default connect(mapStateToProps)(Checklists);
