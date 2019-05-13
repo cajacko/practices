@@ -42,6 +42,7 @@ A lot of these items can and should be automated, but are here for completeness.
 - [ ] Ensure there are no commented out pieces of code, unless they have a good reason for being there
 - [ ] Does the code make sense without any of the comments
 - [ ] Do all vars, funcs, classes etc have good semantic naming
+- [ ] Do all files/folders follow the naming conventions set out in the project? If no conventions, set them out.
 - [ ] Ensure your PR has an good description of changes and links to any issues/tickets/deployed assets etc
 - [ ] Have all comments to this PR been replied to and resolved?
 
