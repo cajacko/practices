@@ -1,0 +1,54 @@
+# Checklists
+
+Here are a series of checklists I use at various stages in a project life cycle.
+
+The main point of these checklists is to give you a standardised process of verifying everything
+that can't or isn't yet automated. I'd recommend including checklists like these in your project,
+either in README files or find some way of enforcing devs to check everything when performing one of
+the actions e.g. You can't make a PR without checking a manual list of items you should have thought
+of.
+
+- [Checklists](#checklists)
+  - [Creating a New Branch](#creating-a-new-branch)
+  - [Code Review (making, updating and reviewing)](#code-review-making-updating-and-reviewing)
+  - [Deploying/publishing](#deployingpublishing)
+
+## Creating a New Branch
+
+- [ ] Does ths issue being worked on focus on the user or reference a user story?
+- [ ] Does the issue being worked on have enough detail and acceptance criteria to complete it
+- [ ] Is this issue big enough to be split across multiple branches? Try to keep branches small.
+- [ ] Does the branch name follow the naming conventions for your repository? If no conventions, set them out.
+
+## Code Review (making, updating and reviewing)
+
+A lot of these items can and should be automated, but are here for completeness.
+
+- [ ] Is the PR too big and need splitting up?
+- [ ] Do the changes conform to your linting standards?
+- [ ] Do the changes pass type checks and compiles?
+- [ ] Do the unit tests pass?
+- [ ] Are there sufficient integration tests and do they pass?
+- [ ] Are there sufficient functional/end to end tests and do they pass? (Or do the smoke tests pass if you don't run all of them at code review?)
+- [ ] Does the code covereage pass?
+- [ ] Does the naming of every test make sense without the code there?
+- [ ] Are the functional/end to end tests written in a clear and concise way so that a non dev can read them
+- [ ] Do all the build tasks finish successfully
+- [ ] Have you run the code and checked the changed functionality?
+- [ ] Has the changelog been updated sufficiently
+- [ ] Are all version changes there and semantically correct
+- [ ] Is there sufficient documentation for all changes
+- [ ] Are there any changes in practices, code styling, setup etc that need to be documented as a result of the work done here?
+- [ ] Ensure there are no commented out pieces of code, unless they have a good reason for being there
+- [ ] Does the code make sense without any of the comments
+- [ ] Do all vars, funcs, classes etc have good semantic naming
+- [ ] Ensure your PR has an good description of changes and links to any issues/tickets/deployed assets etc
+- [ ] Have all comments to this PR been replied to and resolved?
+
+## Deploying/publishing
+
+- [ ] Has the code been deployed and tested in a pre live environment first?
+- [ ] Have all function/end to end tests been run for this new code?
+- [ ] Has the changelog been updated with the new changes?
+- [ ] Has the version been updated correctly for semantic versioning?
+- [ ] Will you be able to quickly and reliably rollback to the previous version if this deploy does not work?
