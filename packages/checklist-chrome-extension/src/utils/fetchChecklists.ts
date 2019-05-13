@@ -148,7 +148,7 @@ const parseChecklists = (content: string): ISetChecklists["payload"] => {
  */
 const fetchChecklists = () => {
   return fetch(
-    "https://raw.githubusercontent.com/cajacko/practices/temp/docs/checklists/README.md"
+    "https://raw.githubusercontent.com/cajacko/practices/master/docs/checklists-reference/README.md"
   )
     .then(res => {
       return res.text();
