@@ -30,7 +30,7 @@ A lot of these items can and should be automated, but are here for completeness.
 - [ ] Do the unit tests pass?
 - [ ] Are there sufficient integration tests and do they pass?
 - [ ] Are there sufficient functional/end to end tests and do they pass? (Or do the smoke tests pass if you don't run all of them at code review?)
-- [ ] Does the code covereage pass?
+- [ ] Does the code coverage pass?
 - [ ] Does the naming of every test make sense without the code there?
 - [ ] Are the functional/end to end tests written in a clear and concise way so that a non dev can read them
 - [ ] Do all the build tasks finish successfully
@@ -45,6 +45,7 @@ A lot of these items can and should be automated, but are here for completeness.
 - [ ] Do all files/folders follow the naming conventions set out in the project? If no conventions, set them out.
 - [ ] Ensure your PR has an good description of changes and links to any issues/tickets/deployed assets etc
 - [ ] Have all comments to this PR been replied to and resolved?
+- [ ] Was this code based off any templating tools that may need updating with your new practices?
 
 ## Deploying/publishing
 
