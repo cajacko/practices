@@ -46,6 +46,8 @@ A bunch of stuff to think about when setting up a new dev project
 - Continuous deployment setup
 - Continuous integration setup
 - Ensure there is only 1 command to start the dev environment
+- Setup api documentation/visual component library
+- Add a LICENSE file
 
 ## README.md files
 
@@ -54,14 +56,20 @@ When creating or editing a README file ensure it has the following:
 - Title
 - Build status flags
 - One line description
+- Add a fun image to describe the project
 - More comprehensive description
 - Table of contents (If big enough)
+- Motivation
+- Screenshots
+- Tech stack
 - Installation instructions for developers (Including any global dependencies your machine may need)
+- API Reference/Visual component guide
 - How to build a production ready version of the project
 - How to run the test suites
 - How to customise environmental variables for the project
 - Link to CONTRIBUTING.md file
-- Link to core contributors
+- Link to core contributors (credits)
+- License
 
 ## CONTRIBUTING.md files
 
