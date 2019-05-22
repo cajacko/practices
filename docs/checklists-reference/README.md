@@ -10,6 +10,7 @@ of.
 
 - [Checklists](#checklists)
   - [README.md files](#readmemd-files)
+  - [CONTRIBUTING.md files](#contributingmd-files)
   - [Creating a New Branch](#creating-a-new-branch)
   - [Code Review (making, updating and reviewing)](#code-review-making-updating-and-reviewing)
   - [Deploying/publishing](#deployingpublishing)
@@ -29,6 +30,20 @@ When creating or editing a README file ensure it has the following:
 - How to customise environmental variables for the project
 - Link to CONTRIBUTING.md file
 - Link to core contributors
+
+## CONTRIBUTING.md files
+
+- Code of conduct
+- Branch organisation
+- Commit message conventions
+- File/folder naming conventions
+- Semantic versioning
+- Bugs
+- Contact
+- Proposing change
+- Making a Pull Request (including checklist of things to remember)
+- Development workflow
+- Style Guide (linting, prettier, dev principles etc)
 
 ## Creating a New Branch
 
