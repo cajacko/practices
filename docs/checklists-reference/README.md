@@ -46,6 +46,8 @@ A lot of these items can and should be automated, but are here for completeness.
 - [ ] Ensure your PR has an good description of changes and links to any issues/tickets/deployed assets etc
 - [ ] Have all comments to this PR been replied to and resolved?
 - [ ] Was this code based off any templating tools that may need updating with your new practices?
+- [ ] Don't abstract on top of well established apis/patterns
+- [ ] If there's no breaking changes, ensure previous api requests are tested against the new api
 
 ## Deploying/publishing
 
