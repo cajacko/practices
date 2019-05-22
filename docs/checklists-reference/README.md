@@ -9,11 +9,43 @@ the actions e.g. You can't make a PR without checking a manual list of items you
 of.
 
 - [Checklists](#checklists)
+  - [New Repo Setup](#new-repo-setup)
   - [README.md files](#readmemd-files)
   - [CONTRIBUTING.md files](#contributingmd-files)
   - [Creating a New Branch](#creating-a-new-branch)
   - [Code Review (making, updating and reviewing)](#code-review-making-updating-and-reviewing)
   - [Deploying/publishing](#deployingpublishing)
+
+## New Repo Setup
+
+A bunch of stuff to think about when setting up a new dev project
+
+- Do you really need to build this
+- Add a .editorconfig file
+- Add a .gitignore file
+- Add a .gitattributes file
+- Add a README.md file
+- Add a CHANGELOG.md file
+- Add a CONTRIBUTING.md file
+- Setup linting
+- Setup type checking
+- Setup unit tests
+- Setup func/e2e tests
+- Setup smoke and full suite tests
+- Setup error logging
+- Setup analytics
+- Setup feature toggles
+- Add a/b test setup
+- .env setup
+- Issue/feature/user story tracker
+- Business dev setup (canvas etc)
+- Add support for translations
+- Setup date mocking
+- Offline dev setup
+- Container setup
+- Continuous deployment setup
+- Continuous integration setup
+- Ensure there is only 1 command to start the dev environment
 
 ## README.md files
 
