@@ -9,9 +9,26 @@ the actions e.g. You can't make a PR without checking a manual list of items you
 of.
 
 - [Checklists](#checklists)
+  - [README.md files](#readmemd-files)
   - [Creating a New Branch](#creating-a-new-branch)
   - [Code Review (making, updating and reviewing)](#code-review-making-updating-and-reviewing)
   - [Deploying/publishing](#deployingpublishing)
+
+## README.md files
+
+When creating or editing a README file ensure it has the following:
+
+- Title
+- Build status flags
+- One line description
+- More comprehensive description
+- Table of contents (If big enough)
+- Installation instructions for developers (Including any global dependencies your machine may need)
+- How to build a production ready version of the project
+- How to run the test suites
+- How to customise environmental variables for the project
+- Link to CONTRIBUTING.md file
+- Link to core contributors
 
 ## Creating a New Branch
 
