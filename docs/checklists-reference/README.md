@@ -20,70 +20,70 @@ of.
 
 A bunch of stuff to think about when setting up a new dev project
 
-- Do you really need to build this
-- Add a .editorconfig file
-- Add a .gitignore file
-- Add a .gitattributes file
-- Add a README.md file
-- Add a CHANGELOG.md file
-- Add a CONTRIBUTING.md file
-- Setup linting
-- Setup type checking
-- Setup unit tests
-- Setup func/e2e tests
-- Setup smoke and full suite tests
-- Setup error logging
-- Setup analytics
-- Setup feature toggles
-- Add a/b test setup
-- .env setup
-- Issue/feature/user story tracker
-- Business dev setup (canvas etc)
-- Add support for translations
-- Setup date mocking
-- Offline dev setup
-- Container setup
-- Continuous deployment setup
-- Continuous integration setup
-- Ensure there is only 1 command to start the dev environment
-- Setup api documentation/visual component library
-- Add a LICENSE file
+- [ ] Do you really need to build this
+- [ ] Add a .editorconfig file
+- [ ] Add a .gitignore file
+- [ ] Add a .gitattributes file
+- [ ] Add a README.md file
+- [ ] Add a CHANGELOG.md file
+- [ ] Add a CONTRIBUTING.md file
+- [ ] Setup linting
+- [ ] Setup type checking
+- [ ] Setup unit tests
+- [ ] Setup func/e2e tests
+- [ ] Setup smoke and full suite tests
+- [ ] Setup error logging
+- [ ] Setup analytics
+- [ ] Setup feature toggles
+- [ ] Add a/b test setup
+- [ ] .env setup
+- [ ] Issue/feature/user story tracker
+- [ ] Business dev setup (canvas etc)
+- [ ] Add support for translations
+- [ ] Setup date mocking
+- [ ] Offline dev setup
+- [ ] Container setup
+- [ ] Continuous deployment setup
+- [ ] Continuous integration setup
+- [ ] Ensure there is only 1 command to start the dev environment
+- [ ] Setup api documentation/visual component library
+- [ ] Add a LICENSE file
 
 ## README.md files
 
 When creating or editing a README file ensure it has the following:
 
-- Title
-- Build status flags
-- One line description
-- Add a fun image to describe the project
-- More comprehensive description
-- Table of contents (If big enough)
-- Motivation
-- Screenshots
-- Tech stack
-- Installation instructions for developers (Including any global dependencies your machine may need)
-- API Reference/Visual component guide
-- How to build a production ready version of the project
-- How to run the test suites
-- How to customise environmental variables for the project
-- Link to CONTRIBUTING.md file
-- Link to core contributors (credits)
-- License
+- [ ] Title
+- [ ] Build status flags
+- [ ] One line description
+- [ ] Add a fun image to describe the project
+- [ ] More comprehensive description
+- [ ] Table of contents (If big enough)
+- [ ] Motivation
+- [ ] Screenshots
+- [ ] Tech stack
+- [ ] Installation instructions for developers (Including any global dependencies your machine may need)
+- [ ] API Reference/Visual component guide
+- [ ] How to build a production ready version of the project
+- [ ] How to run the test suites
+- [ ] How to customise environmental variables for the project
+- [ ] Link to CONTRIBUTING.md file
+- [ ] Link to core contributors (credits)
+- [ ] License
 
 ## CONTRIBUTING.md files
 
-- Code of conduct
-- Branch organisation
-- Commit message conventions
-- File/folder naming conventions
-- Semantic versioning
-- Bugs
-- Contact
-- Proposing change
-- Making a Pull Request (including checklist of things to remember)
-- Development workflow
-- Style Guide (linting, prettier, dev principles etc)
+- [ ] Code of conduct
+- [ ] Branch organisation
+- [ ] Commit message conventions
+- [ ] File/folder naming conventions
+- [ ] Semantic versioning
+- [ ] Bugs
+- [ ] Contact
+- [ ] Proposing change
+- [ ] Making a Pull Request (including checklist of things to remember)
+- [ ] Development workflow
+- [ ] Style Guide (linting, prettier, dev principles etc)
 
 ## Creating a New Branch
 
