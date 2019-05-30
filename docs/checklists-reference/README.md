@@ -120,6 +120,7 @@ A lot of these items can and should be automated, but are here for completeness.
 - [ ] Was this code based off any templating tools that may need updating with your new practices?
 - [ ] Don't abstract on top of well established apis/patterns
 - [ ] If there's no breaking changes, ensure previous api requests are tested against the new api
+- [ ] Check any automated documentation generated from code
 
 ## Deploying/publishing
 
