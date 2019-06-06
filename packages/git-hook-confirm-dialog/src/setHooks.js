@@ -1,15 +1,23 @@
-const runCommand = require("./runCommand");
 const { join } = require("path");
+const { copy, ensureDir } = require("fs-extra");
+const runCommand = require("./runCommand");
+
+const postCommit = join(__dirname, "./post-commit");
+
+const setHook = dir => {
+  const hooksDir = join(dir, ".git/hooks");
+
+  return ensureDir(hooksDir).then(() => {
+    const dest = join(hooksDir, "post-commit");
+
+    return copy(postCommit, dest);
+  });
+};
 
 const setHooks = () => {
-  const gitTemplateDir = join(__dirname, "./git-templates");
+  const dir = join(__dirname, "../../../../");
 
-  return runCommand("git", [
-    "config",
-    "--global",
-    "init.templatedir",
-    gitTemplateDir
-  ]);
+  setHook(join(dir, "practices"));
 };
 
 module.exports = setHooks;

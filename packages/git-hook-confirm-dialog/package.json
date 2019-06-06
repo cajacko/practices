@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "cross-spawn": "^6.0.5",
-    "dialog": "^0.3.1"
+    "dialog": "^0.3.1",
+    "fs-extra": "^8.0.1"
   }
 }
