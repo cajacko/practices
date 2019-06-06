@@ -1,7 +1,3 @@
-#!/bin/sh
+#!/usr/bin/env node
 
-# Copy last commit hash to clipboard on commit
-git log -1 --format=format:%h | pbcopy
-
-# Add other post-commit hooks 
-
+throw new Error('Oh no!!');
