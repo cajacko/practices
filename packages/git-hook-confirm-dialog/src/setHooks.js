@@ -1,8 +1,14 @@
 const { join } = require("path");
-const { copy, ensureDir } = require("fs-extra");
+const { writeFile, ensureDir } = require("fs-extra");
 const runCommand = require("./runCommand");
 
-const postCommit = join(__dirname, "./post-commit");
+const hookFilePath = join(__dirname, "./hook.js");
+
+const hookContents = `#!/bin/sh
+node ${hookFilePath}
+
+exit 1
+`;
 
 const setHook = dir => {
   const hooksDir = join(dir, ".git/hooks");
@@ -10,7 +16,7 @@ const setHook = dir => {
   return ensureDir(hooksDir).then(() => {
     const dest = join(hooksDir, "post-commit");
 
-    return copy(postCommit, dest);
+    return writeFile(dest, hookContents);
   });
 };
 

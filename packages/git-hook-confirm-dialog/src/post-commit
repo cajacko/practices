@@ -1,7 +1,0 @@
-#!/usr/bin/env node
-
-console.log("thinking");
-
-setTimeout(() => {
-  throw new Error("Oh no!!");
-}, 2000);
