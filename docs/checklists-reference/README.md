@@ -8,13 +8,13 @@ either in README files or find some way of enforcing devs to check everything wh
 the actions e.g. You can't make a PR without checking a manual list of items you should have thought
 of.
 
-- [Checklists](#checklists)
-  - [New Repo Setup](#new-repo-setup)
-  - [README.md files](#readmemd-files)
-  - [CONTRIBUTING.md files](#contributingmd-files)
-  - [Creating a New Branch](#creating-a-new-branch)
-  - [Code Review (making, updating and reviewing)](#code-review-making-updating-and-reviewing)
-  - [Deploying/publishing](#deployingpublishing)
+- [Checklists](#Checklists)
+  - [New Repo Setup](#New-Repo-Setup)
+  - [README.md files](#READMEmd-files)
+  - [CONTRIBUTING.md files](#CONTRIBUTINGmd-files)
+  - [Creating a New Branch](#Creating-a-New-Branch)
+  - [Code Review (making, updating and reviewing)](#Code-Review-making-updating-and-reviewing)
+  - [Deploying/publishing](#Deployingpublishing)
 
 ## New Repo Setup
 
@@ -121,6 +121,7 @@ A lot of these items can and should be automated, but are here for completeness.
 - [ ] Don't abstract on top of well established apis/patterns
 - [ ] If there's no breaking changes, ensure previous api requests are tested against the new api
 - [ ] Check any automated documentation generated from code
+- [ ] Are you using translated text where appropriate
 
 ## Deploying/publishing
 
