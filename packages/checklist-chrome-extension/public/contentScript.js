@@ -1,7 +1,11 @@
 const selectors = [
   {
     urls: ["jira", "stash", "bitbucket"],
-    selectors: [".merge-button", "#create-branch-submit"]
+    selectors: [
+      ".merge-button",
+      "#create-branch-submit",
+      "#show-create-pr-button"
+    ]
   },
   {
     urls: ["github"],
