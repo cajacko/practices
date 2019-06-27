@@ -23,26 +23,37 @@ const mapDispatchToProps = (
 
 const mapStateToProps = (state: IState, props: IOwnProps): IMapStateProps => {
   const checklist = state.checklistsById[props.id];
-  const checks = state.checksByChecklistId[props.id] || {};
+
+  const key = state.showEditMode
+    ? "hiddenItemsByChecklistId"
+    : "checksByChecklistId";
+
+  const checks = state[key][props.id] || {};
 
   if (!checklist) {
     return {
+      showEditMode: state.showEditMode,
       items: null,
       checklists: null,
       exists: false
     };
   }
 
+  const hiddenChecks = state.hiddenItemsByChecklistId[props.id] || {};
+
   return {
+    showEditMode: state.showEditMode,
     exists: true,
     checklists: checklist.checklists,
     items: checklist.items
-      ? checklist.items.map(item => {
-          return {
-            ...item,
-            checked: !!checks[item.id]
-          };
-        })
+      ? checklist.items
+          .filter(item => (state.showEditMode ? true : !hiddenChecks[item.id]))
+          .map(item => {
+            return {
+              ...item,
+              checked: !!checks[item.id]
+            };
+          })
       : null
   };
 };
