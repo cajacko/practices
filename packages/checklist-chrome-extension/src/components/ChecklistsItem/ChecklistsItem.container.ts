@@ -38,7 +38,8 @@ const mapStateToProps = (state: IState, props: IOwnProps): IMapStateProps => {
       title: "No Checklist",
       items: null,
       checklists: null,
-      hasChecklistItems: false
+      hasChecklistItems: false,
+      showEditMode: state.showEditMode
     };
   }
 
@@ -46,7 +47,8 @@ const mapStateToProps = (state: IState, props: IOwnProps): IMapStateProps => {
     ...checklist,
     isExpanded: !!state.expandedByChecklistId[props.id],
     exists: true,
-    hasChecklistItems: !!checklist.items && !!checklist.items.length
+    hasChecklistItems: !!checklist.items && !!checklist.items.length,
+    showEditMode: state.showEditMode
   };
 };
 

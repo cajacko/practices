@@ -5,13 +5,13 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import Clear from "@material-ui/icons/Clear";
+import Check from "@material-ui/icons/Check";
 import Collapse from "@material-ui/core/Collapse";
 import Divider from "@material-ui/core/Divider";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
 import Checklist from "../Checklist";
-import { connect } from "react-redux";
-import { IState, IChecklist, Dispatch } from "../../store";
+import { IChecklist } from "../../store";
 import Container from "./ChecklistsItem.container";
 
 export interface IOwnProps {
@@ -24,6 +24,7 @@ export interface IMapStateProps extends IChecklist {
   exists: boolean;
   hasChecklistItems: boolean;
   checklists: string[] | null;
+  showEditMode: boolean;
 }
 
 export interface IMapDispatchProps {
@@ -55,7 +56,7 @@ const ChecklistsItem = (props: IProps) => {
         {props.isExpanded && props.hasChecklistItems && (
           <ListItemSecondaryAction>
             <IconButton aria-label="Clear Checks" onClick={props.clearChecks}>
-              <Clear />
+              {props.showEditMode ? <Check /> : <Clear />}
             </IconButton>
           </ListItemSecondaryAction>
         )}
@@ -74,51 +75,4 @@ const ChecklistsItem = (props: IProps) => {
   );
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch,
-  props: IOwnProps
-): IMapDispatchProps => ({
-  setIsExpanded: (isExpanded: boolean) =>
-    dispatch({
-      type: "SET_IS_EXPANDED",
-      payload: {
-        checklistId: props.id,
-        isExpanded
-      }
-    }),
-  clearChecks: () =>
-    dispatch({
-      type: "CLEAR_CHECKS",
-      payload: {
-        checklistId: props.id
-      }
-    })
-});
-
-const mapStateToProps = (state: IState, props: IOwnProps): IMapStateProps => {
-  const checklist = state.checklistsById[props.id];
-
-  if (!checklist) {
-    return {
-      exists: false,
-      id: "NONE",
-      isExpanded: false,
-      title: "No Checklist",
-      items: null,
-      checklists: null,
-      hasChecklistItems: false
-    };
-  }
-
-  return {
-    ...checklist,
-    isExpanded: !!state.expandedByChecklistId[props.id],
-    exists: true,
-    hasChecklistItems: !!checklist.items && !!checklist.items.length
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ChecklistsItem);
+export default ChecklistsItem;

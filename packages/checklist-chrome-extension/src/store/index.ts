@@ -15,6 +15,7 @@ export interface IChecklist {
 }
 
 export interface IState {
+  showEditMode: boolean;
   startingChecklists: string[];
   checklistsById: {
     [key: string]: undefined | IChecklist;
@@ -26,9 +27,21 @@ export interface IState {
           [key: string]: undefined | boolean;
         };
   };
+  hiddenItemsByChecklistId: {
+    [key: string]:
+      | undefined
+      | {
+          [key: string]: undefined | boolean;
+        };
+  };
   expandedByChecklistId: {
     [key: string]: undefined | boolean;
   };
+}
+
+interface ISetShowEditMode {
+  type: "SET_SHOW_EDIT_MODE";
+  payload: boolean;
 }
 
 interface ISetExpandedAction {
@@ -73,15 +86,18 @@ type Actions =
   | ISetCheckedAction
   | IClearChecksAction
   | ISetChecklists
-  | ICloseAllChecklists;
+  | ICloseAllChecklists
+  | ISetShowEditMode;
 
 export type Dispatch = RDispatch<Actions>;
 
 const initialState: IState = {
+  showEditMode: false,
   startingChecklists: [],
   checklistsById: {},
   checksByChecklistId: {},
-  expandedByChecklistId: {}
+  expandedByChecklistId: {},
+  hiddenItemsByChecklistId: {}
 };
 
 const reducer = (state: IState = initialState, action: Actions) => {
@@ -97,13 +113,16 @@ const reducer = (state: IState = initialState, action: Actions) => {
     }
 
     case "SET_CHECKED": {
-      const checklistChecks =
-        state.checksByChecklistId[action.payload.checklistId] || {};
+      const key = state.showEditMode
+        ? "hiddenItemsByChecklistId"
+        : "checksByChecklistId";
+
+      const checklistChecks = state[key][action.payload.checklistId] || {};
 
       return {
         ...state,
-        checksByChecklistId: {
-          ...state.checksByChecklistId,
+        [key]: {
+          ...state[key],
           [action.payload.checklistId]: {
             ...checklistChecks,
             [action.payload.checklistItemId]: action.payload.checked
@@ -113,10 +132,14 @@ const reducer = (state: IState = initialState, action: Actions) => {
     }
 
     case "CLEAR_CHECKS": {
+      const key = state.showEditMode
+        ? "hiddenItemsByChecklistId"
+        : "checksByChecklistId";
+
       return {
         ...state,
-        checksByChecklistId: {
-          ...state.checksByChecklistId,
+        [key]: {
+          ...state[key],
           [action.payload.checklistId]: undefined
         }
       };
@@ -133,6 +156,13 @@ const reducer = (state: IState = initialState, action: Actions) => {
       return {
         ...state,
         expandedByChecklistId: {}
+      };
+    }
+
+    case "SET_SHOW_EDIT_MODE": {
+      return {
+        ...state,
+        showEditMode: action.payload
       };
     }
 

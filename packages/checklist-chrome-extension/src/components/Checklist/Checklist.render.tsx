@@ -18,6 +18,7 @@ export interface IMapStateProps {
   items: IExpandedChecklistItem[] | null;
   exists: boolean;
   checklists: string[] | null;
+  showEditMode: boolean;
 }
 
 export interface IMapDispatchProps {
@@ -26,7 +27,13 @@ export interface IMapDispatchProps {
 
 export interface IProps extends IOwnProps, IMapStateProps, IMapDispatchProps {}
 
-const Checklist = ({ items, setChecked, exists, checklists }: IProps) => {
+const Checklist = ({
+  items,
+  setChecked,
+  exists,
+  checklists,
+  showEditMode
+}: IProps) => {
   if (!exists) return null;
 
   const noContent = !checklists && !items;
@@ -42,7 +49,11 @@ const Checklist = ({ items, setChecked, exists, checklists }: IProps) => {
             button
             onClick={() => setChecked(id, !checked)}
           >
-            <Checkbox checked={checked} tabIndex={-1} disableRipple />
+            <Checkbox
+              checked={showEditMode ? !checked : checked}
+              tabIndex={-1}
+              disableRipple
+            />
             <ListItemText primary={text} />
           </ListItem>
         ))}
