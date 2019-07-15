@@ -122,6 +122,8 @@ A lot of these items can and should be automated, but are here for completeness.
 - [ ] If there's no breaking changes, ensure previous api requests are tested against the new api
 - [ ] Check any automated documentation generated from code
 - [ ] Are you using translated text where appropriate
+- [ ] Are you using best performance practices
+- [ ] Do your changes work across all supported devices and browsers
 
 ## Deploying/publishing
 
