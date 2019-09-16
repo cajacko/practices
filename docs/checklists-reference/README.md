@@ -8,13 +8,13 @@ either in README files or find some way of enforcing devs to check everything wh
 the actions e.g. You can't make a PR without checking a manual list of items you should have thought
 of.
 
-- [Checklists](#Checklists)
-  - [New Repo Setup](#New-Repo-Setup)
-  - [README.md files](#READMEmd-files)
-  - [CONTRIBUTING.md files](#CONTRIBUTINGmd-files)
-  - [Creating a New Branch](#Creating-a-New-Branch)
-  - [Code Review (making, updating and reviewing)](#Code-Review-making-updating-and-reviewing)
-  - [Deploying/publishing](#Deployingpublishing)
+- [Checklists](#checklists)
+  - [New Repo Setup](#new-repo-setup)
+  - [README.md files](#readmemd-files)
+  - [CONTRIBUTING.md files](#contributingmd-files)
+  - [Creating a New Branch](#creating-a-new-branch)
+  - [Code Review (making, updating and reviewing)](#code-review-making-updating-and-reviewing)
+  - [Deploying/publishing](#deployingpublishing)
 
 ## New Repo Setup
 
@@ -35,6 +35,7 @@ A bunch of stuff to think about when setting up a new dev project
 - [ ] Setup error logging
 - [ ] Setup analytics
 - [ ] Setup feature toggles
+- [ ] Add regular task to check that failed tests will fail build (for each test suite)
 - [ ] Add a/b test setup
 - [ ] .env setup
 - [ ] Issue/feature/user story tracker
