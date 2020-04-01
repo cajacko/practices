@@ -110,7 +110,7 @@ A lot of these items can and should be automated, but are here for completeness.
 - [ ] Have you run the code and checked the changed functionality?
 - [ ] Has the changelog been updated sufficiently
 - [ ] Are all version changes there and semantically correct
-- [ ] Is there sufficient documentation for all changes
+- [ ] Is there sufficient documentation for all changes (including stories, component libs, README, JSDoc etc)
 - [ ] Are there any changes in practices, code styling, setup etc that need to be documented as a result of the work done here?
 - [ ] Ensure there are no commented out pieces of code, unless they have a good reason for being there
 - [ ] Does the code make sense without any of the comments
