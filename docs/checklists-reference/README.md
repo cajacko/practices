@@ -125,6 +125,7 @@ A lot of these items can and should be automated, but are here for completeness.
 - [ ] Are you using translated text where appropriate
 - [ ] Are you using best performance practices
 - [ ] Do your changes work across all supported devices and browsers
+- [ ] Do any user stories/specifications need to be updated based on the changes here
 
 ## Deploying/publishing
 
